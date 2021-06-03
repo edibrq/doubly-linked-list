@@ -23,7 +23,7 @@ int size(Node** head){
 }
 
 void push(Node** head, int val){
-    Node *temp = (struct Node*)malloc(sizeof(Node));
+    Node *temp = (Node*)malloc(sizeof(Node));
     temp->data = val;
     temp->next = NULL;
     if(*head == NULL){
@@ -44,7 +44,7 @@ void pop(Node** head, int val){
         return;
     }
 
-    Node *temp = (struct Node*)malloc(sizeof(Node));
+    Node *temp = (Node*)malloc(sizeof(Node));
     temp->data = val;
     temp->next = NULL;
 
