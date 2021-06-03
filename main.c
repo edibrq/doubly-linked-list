@@ -9,6 +9,19 @@ struct Node{
     struct Node *next;
 };
 
+int size(Node** head){
+    int size = 0;
+    if(*head == NULL)
+        return 0;
+    Node *temp = *head;
+    size = 1;
+    do{
+        ++size;
+        temp = temp->next;
+    }while(temp->next != NULL);
+    return size;
+}
+
 void push(Node** head, int val){
     Node *temp = (struct Node*)malloc(sizeof(Node));
     temp->data = val;
@@ -51,11 +64,34 @@ void print(Node** head){
     print(&(*head)->next);
 }
 
+void deleteByPos(Node** head, int pos){
+    Node *temp = *head;
+    for (int i = 0; i < pos - 1; ++i) {
+        temp = temp->next;
+    }
+
+    printf("deleted value is:%d\n", temp->data);
+
+    if(pos == size(head)){
+        temp->prev->next = NULL;
+        free(temp);
+        return;
+    }
+
+    temp->prev->next = temp->next;
+    temp->next->prev = temp->prev;
+    free(temp);
+}
+
 int main() {
     Node *head = NULL;
     pop(&head, 3);
     pop(&head, 2);
     pop(&head, 1);
     push(&head, 5);
+    printf("size of list is:%d\n",size(&head));
+    print(&head);
+    deleteByPos(&head, 4);
+    printf("\n");
     print(&head);
 }
