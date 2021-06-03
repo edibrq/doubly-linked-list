@@ -9,6 +9,13 @@ struct Node{
     struct Node *next;
 };
 
+Node* getNewNode(int val){
+    Node *temp = (Node*)malloc(sizeof(Node));
+    temp->data = val;
+    temp->next = NULL;
+    return temp;
+}
+
 int size(Node** head){
     int size = 0;
     if(*head == NULL)
@@ -23,9 +30,7 @@ int size(Node** head){
 }
 
 void push(Node** head, int val){
-    Node *temp = (Node*)malloc(sizeof(Node));
-    temp->data = val;
-    temp->next = NULL;
+    Node *temp = getNewNode(val);
     if(*head == NULL){
         temp->prev = NULL;
         *head = temp;
@@ -44,9 +49,7 @@ void pop(Node** head, int val){
         return;
     }
 
-    Node *temp = (Node*)malloc(sizeof(Node));
-    temp->data = val;
-    temp->next = NULL;
+    Node *temp = getNewNode(val);
 
     Node *iter = *head;
     while(iter->next != NULL){
